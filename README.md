@@ -1,5 +1,7 @@
 ## editure2
 
+![image-20210203233612141](https://tva1.sinaimg.cn/large/008eGmZEly1gnarsrwywnj312q0s6q52.jpg)
+
 此项目使用 [remirror](https://github.com/remirror/remirror) 来重新实现 [editure](https://github.com/tuture-dev/editure) 的所有功能，目前主要参考 editure 的[线上例子](https://editure-preview.netlify.app/)实现了如下功能：
 
 - 撤销
@@ -50,4 +52,19 @@
 
 - 此项目使用了我为学习前端工程化编写的脚手架初始化而来：[create-fps-app](https://github.com/pftom/create-fps-app)
 - remirror 基于 TypeScript 实现，有必要学习 TypeScript 语法，同时也建议之后项目硬性要求 TypeScript
+- 此项目额外使用了 [prosemirror-dev-tools](https://github.com/d4rkr00t/prosemirror-dev-tools)，用于 prosemirror 的方便调试，位于页面右下角，具体效果如下：
+
+![image-20210203234145682](https://tva1.sinaimg.cn/large/008eGmZEly1gnarx0cf5dj31du0u0gtv.jpg)
+
+### 如何开启项目
+
+确保你安装了 [Node.js](http://nodejs.org/)（`>=v14.15.0`）以及 [yarn](https://yarnpkg.com/)，然后运行如下命令：
+
+```bash
+$ git clone https://github.com/tuture-dev/editure2.git
+$ cd editure2 && yarn
+$ yarn start
+```
+
+
 

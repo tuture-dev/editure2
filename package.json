@@ -79,6 +79,7 @@
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
     "@remirror/dev": "^1.0.0-next.60",
+    "antd": "^4.12.1",
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
