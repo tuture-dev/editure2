@@ -100,6 +100,16 @@ export const Menu = () => {
           代码块
         </button>
         <button
+          onClick={() => commands.toggleBulletList()}
+          style={{ fontWeight: active.bulletList() ? 'bold' : undefined }}>
+          UL
+        </button>
+        <button
+          onClick={() => commands.toggleOrderedList()}
+          style={{ fontWeight: active.orderedList() ? 'bold' : undefined }}>
+          OL
+        </button>
+        <button
           onClick={() => commands.insertHorizontalRule()}
           style={{
             fontWeight: active.horizontalRule() ? 'bold' : undefined,
@@ -119,10 +129,10 @@ export const TextEditor = () => {
       css={css`
         width: 666px;
         margin: auto;
-        padding-top: 8px;
 
         .remirror-editor {
           border: 1px solid black;
+          padding: 8px;
           min-height: 400px;
         }
       `}

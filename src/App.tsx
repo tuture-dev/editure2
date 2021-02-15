@@ -17,6 +17,7 @@ import { HeadingExtension } from 'remirror/extension/heading';
 import {
   BulletListExtension,
   OrderedListExtension,
+  ListItemExtension,
 } from 'remirror/preset/list';
 import { ImageExtension } from 'remirror/extension/image';
 import { HorizontalRuleExtension } from 'remirror/extension/horizontal-rule';
@@ -48,6 +49,9 @@ const EditorWrapper = () => {
     new CodeBlockExtension({
       supportedLanguages: [refractorJsx],
     }),
+    new BulletListExtension(),
+    new OrderedListExtension(),
+    new ListItemExtension(),
     new ImageExtension(),
     new HorizontalRuleExtension(),
   ]);
