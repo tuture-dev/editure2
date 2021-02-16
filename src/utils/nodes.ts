@@ -1,4 +1,4 @@
-import { setBlockType } from 'prosemirror-commands';
+import { setBlockType, wrapIn, lift } from 'prosemirror-commands';
 import { findParentNode, findSelectedNodeOfType } from 'prosemirror-utils';
 
 export const isNodeActive = (type, attrs: Record<string, any> = {}) => (
@@ -24,5 +24,17 @@ export function toggleBlockType(type, toggleType, attrs = {}) {
     }
 
     return setBlockType(type, attrs)(state, dispatch);
+  };
+}
+
+export function toggleWrap(type, attrs?: Record<string, any>) {
+  return (state, dispatch) => {
+    const isActive = isNodeActive(type)(state);
+
+    if (isActive) {
+      return lift(state, dispatch);
+    }
+
+    return wrapIn(type, attrs)(state, dispatch);
   };
 }

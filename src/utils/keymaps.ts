@@ -1,6 +1,7 @@
 import { Keymap, toggleMark, setBlockType } from 'prosemirror-commands';
 import { redo, undo } from 'prosemirror-history';
 import schema from './schema';
+import { toggleWrap } from './nodes';
 
 function createKeymaps() {
   let keys: Keymap<any> = {},
@@ -62,6 +63,13 @@ function createKeymaps() {
   // Paragraph
   if ((type = schema.nodes.paragraph)) {
     bind(`Shift-Ctrl-0`, setBlockType(type));
+  }
+
+  // Blockquote
+  // keymap 值得商榷
+  if ((type = schema.nodes.blockquote)) {
+    bind('Ctrl->', toggleWrap(type));
+    bind('Mod-]', toggleWrap(type));
   }
 
   return keys;

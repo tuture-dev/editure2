@@ -34,6 +34,9 @@ function createParser() {
       block: 'heading',
       getAttrs: (token) => ({ level: +token.tag.slice(1) }),
     },
+    blockquote: {
+      block: 'blockquote',
+    },
     hardbreak: { node: 'hard_break' },
   };
 

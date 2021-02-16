@@ -3,11 +3,11 @@ import { backticksFor, isPlainURL } from './marks';
 
 function createSerializer() {
   const nodes = {
-    blockquote: (state: any, node: any) => {
-      state.wrapBlock('> ', null, node, () => state.renderContent(node));
-    },
     text: (state: any, node: any) => {
       state.text(node.text);
+    },
+    blockquote: (state: any, node: any) => {
+      state.wrapBlock('> ', null, node, () => state.renderContent(node));
     },
     paragraph: (state: any, node: any) => {
       if (

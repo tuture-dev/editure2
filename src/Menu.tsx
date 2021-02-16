@@ -9,8 +9,8 @@ import { undo, redo } from 'prosemirror-history';
 import { jsx, css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { isMarkActive, backticksFor } from './utils/marks';
-import { isNodeActive, toggleBlockType } from './utils/nodes';
+import { isMarkActive } from './utils/marks';
+import { isNodeActive, toggleBlockType, toggleWrap } from './utils/nodes';
 
 const { Option } = Select;
 
@@ -148,6 +148,9 @@ function Menu(props: Props) {
         Link
       </Button>
       <Select
+        style={{
+          marginRight: '10px',
+        }}
         defaultValue="正文"
         onChange={(value) => {
           // TODO: 根据选中块高亮对应的 select value
@@ -173,6 +176,24 @@ function Menu(props: Props) {
         <Option value="h4">标题 4</Option>
         <Option value="h5">标题 5</Option>
       </Select>
+      <Button
+        style={{
+          fontWeight:
+            props.view &&
+            isNodeActive(props.schema?.nodes.blockquote)(props.view?.state)
+              ? 'bold'
+              : undefined,
+        }}
+        onClick={() => {
+          toggleWrap(props.schema.nodes.blockquote)(
+            props.view?.state,
+            props.view?.dispatch,
+          );
+
+          props.view.focus();
+        }}>
+        引用
+      </Button>
       <br />
       <br />
     </div>

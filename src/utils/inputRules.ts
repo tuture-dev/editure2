@@ -1,4 +1,8 @@
-import { InputRule, textblockTypeInputRule } from 'prosemirror-inputrules';
+import {
+  InputRule,
+  textblockTypeInputRule,
+  wrappingInputRule,
+} from 'prosemirror-inputrules';
 import schema from './schema';
 import markInputRule from './markInputRule';
 import { level } from 'chalk';
@@ -55,6 +59,10 @@ function createInputRules() {
 
     inputRules.push(heading);
   }
+
+  // Blockquote
+  const blockquote = wrappingInputRule(/^\s*>\s$/, schema.nodes.blockquote);
+  inputRules.push(blockquote);
 
   return inputRules;
 }
