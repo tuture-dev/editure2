@@ -6,6 +6,7 @@ import { baseKeymap, Keymap } from 'prosemirror-commands';
 import { keymap } from 'prosemirror-keymap';
 import { MarkdownParser, MarkdownSerializer } from 'prosemirror-markdown';
 import { inputRules, InputRule } from 'prosemirror-inputrules';
+import { history } from 'prosemirror-history';
 
 import './App.css';
 import StyledEditor from './StyledEditor';
@@ -56,6 +57,7 @@ class Editor extends React.Component<Props> {
       schema,
       doc,
       plugins: [
+        history(),
         gapCursor(),
         inputRules({
           rules: this.inputRules,

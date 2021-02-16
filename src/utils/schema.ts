@@ -1,4 +1,4 @@
-import { Schema, NodeSpec, MarkSpec } from 'prosemirror-model';
+import { Schema, NodeSpec, MarkSpec, Node } from 'prosemirror-model';
 
 const nodes: { [name: string]: NodeSpec } = {
   doc: {
@@ -33,6 +33,35 @@ const nodes: { [name: string]: NodeSpec } = {
 };
 
 const marks: { [name: string]: MarkSpec } = {
+  strong: {
+    parseDOM: [
+      { tag: 'strong' },
+      {
+        tag: 'b',
+        getAttrs: (node: any) => node?.style.fontWeight !== 'normal' && null,
+      },
+      {
+        style: 'font-weight',
+        getAttrs: (value: string) =>
+          /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null,
+      },
+    ],
+    toDOM: () => ['strong', 0],
+  },
+  em: {
+    parseDOM: [{ tag: 'i' }, { tag: 'em' }, { style: 'font-style=italic' }],
+    toDOM: () => ['em', 0],
+  },
+  underline: {
+    parseDOM: [
+      { tag: 'u' },
+      {
+        style: 'text-decoration',
+        getAttrs: (value: string) => value === 'underline' && null,
+      },
+    ],
+    toDOM: () => ['u', 0],
+  },
   code: {
     parseDOM: [{ tag: 'code' }],
     // @ts-ignore

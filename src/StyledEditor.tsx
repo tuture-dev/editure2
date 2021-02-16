@@ -67,6 +67,12 @@ const StyledEditor = styled.div`
     padding: 3px;
   }
 
+  :not(pre) > code {
+    font-family: monospace;
+    background-color: #eee;
+    padding: 3px;
+  }
+
   img {
     max-width: 100%;
     max-height: 20em;

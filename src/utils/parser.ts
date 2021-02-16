@@ -4,6 +4,15 @@ import schema from './schema';
 
 function createParser() {
   const tokens = {
+    strong: {
+      mark: 'strong',
+    },
+    em: {
+      mark: 'em',
+    },
+    underline: {
+      mark: 'u',
+    },
     code_inline: {
       mark: 'code',
       noCloseToken: true,

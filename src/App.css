@@ -1,10 +1,6 @@
-@import '~antd/dist/antd.css';
-
 html,
 input,
 textarea {
-  font-family: 'Roboto', 'Ubuntu Mono', Consolas, monospace;
   line-height: 1.4;
-  background: #eee;
   word-break: break-all;
 }

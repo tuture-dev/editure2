@@ -90,6 +90,7 @@
     "dotenv-expand": "^5.1.0",
     "lodash": "^4.17.20",
     "markdown-it": "^12.0.4",
+    "markdown-it-underline": "^1.0.1",
     "prosemirror-commands": "^1.1.5",
     "prosemirror-example-setup": "^1.1.2",
     "prosemirror-gapcursor": "^1.1.5",
