@@ -1,75 +1,54 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { ProsemirrorDevTools } from '@remirror/dev';
+import React, {
+  useCallback,
+  useMemo,
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from 'react';
+import debounce from 'lodash/debounce';
 
-import { BoldExtension } from 'remirror/extension/bold';
-import { ItalicExtension } from 'remirror/extension/italic';
-import { UnderlineExtension } from 'remirror/extension/underline';
-import { BlockquoteExtension } from 'remirror/extension/blockquote';
-import { StrikeExtension } from 'remirror/extension/strike';
-import { HistoryExtension } from 'remirror/extension/history';
-import { CodeExtension } from 'remirror/extension/code';
-
-import refractorJsx from 'refractor/lang/jsx';
-import { CodeBlockExtension } from 'remirror/extension/code-block';
-
-import { LinkExtension } from 'remirror/extension/link';
-import { HeadingExtension } from 'remirror/extension/heading';
-import {
-  BulletListExtension,
-  OrderedListExtension,
-  ListItemExtension,
-} from 'remirror/preset/list';
-import { ImageExtension } from 'remirror/extension/image';
-import { HorizontalRuleExtension } from 'remirror/extension/horizontal-rule';
-import { CorePreset } from 'remirror/preset/core';
-import { RemirrorProvider, useManager } from 'remirror/react';
-
+import Editor from './Editor';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 
-import { Menu, TextEditor } from './MyEditor';
-import './App.css';
+const savedText = localStorage.getItem('saved');
+const exampleText = `
+This is example content. It is persisted between reloads in localStorage.
+`;
+const defaultValue = savedText || exampleText;
 
-const EditorWrapper = () => {
-  const manager = useManager([
-    new HistoryExtension({}),
-    new CorePreset({}),
-    new BoldExtension({}),
-    new ItalicExtension(),
-    new UnderlineExtension(),
-    new StrikeExtension(),
-    new CodeExtension(),
-    new LinkExtension({
-      autoLink: true,
-    }),
-    new HeadingExtension({
-      levels: [1, 2],
-    }),
-    new BlockquoteExtension(),
-    new CodeBlockExtension({
-      supportedLanguages: [refractorJsx],
-    }),
-    new BulletListExtension(),
-    new OrderedListExtension(),
-    new ListItemExtension(),
-    new ImageExtension(),
-    new HorizontalRuleExtension(),
-  ]);
+function App() {
+  const [value, setValue] = useState(undefined);
+
+  const handleChange = debounce((value) => {
+    const text = value();
+    console.log(text);
+    localStorage.setItem('saved', text);
+  }, 250);
+
+  const handleUpdateValue = () => {
+    const existing = localStorage.getItem('saved') || '';
+    const value = `${existing}\n\nedit!`;
+    localStorage.setItem('saved', value);
+
+    setValue(value);
+  };
 
   return (
-    <RemirrorProvider manager={manager}>
-      <div
-        css={css`
-          width: 666px;
-          margin: auto;
-          padding-top: 40px;
-        `}>
-        <Menu />
-        <TextEditor />
-      </div>
-      <ProsemirrorDevTools />
-    </RemirrorProvider>
+    <div
+      css={css`
+        width: 666px;
+        margin: auto;
+        padding-top: 40px;
+      `}>
+      <Editor
+        value={value}
+        defaultValue={defaultValue}
+        onChange={handleChange}
+      />
+    </div>
   );
-};
+}
 
-export default EditorWrapper;
+export default App;
