@@ -44,6 +44,12 @@ function createSerializer() {
       mixable: true,
       expelEnclosingWhitespace: true,
     },
+    underline: {
+      open: '__',
+      close: '__',
+      mixable: true,
+      expelEnclosingWhitespace: true,
+    },
     code: {
       open(_state: any, _mark: any, parent: any, index: any) {
         return backticksFor(parent.child(index), -1);

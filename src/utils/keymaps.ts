@@ -23,6 +23,10 @@ function createKeymaps() {
     bind('Mod-I', toggleMark(type));
   }
 
+  if ((type = schema.marks.underline)) {
+    bind('Mod-u', toggleMark(type));
+  }
+
   // code keymaps
   if ((type = schema.marks.code)) {
     bind('Mod-e', toggleMark(type));

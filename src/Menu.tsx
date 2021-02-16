@@ -72,6 +72,23 @@ function Menu(props: Props) {
         style={{
           fontWeight:
             props.view &&
+            isMarkActive(props.view?.state, props.schema?.marks.underline)
+              ? 'bold'
+              : undefined,
+        }}
+        onClick={() =>
+          toggleMark(props.schema.marks.underline)(
+            props.view?.state,
+            props.view?.dispatch,
+          )
+        }>
+        U
+      </button>
+      <button
+        type="button"
+        style={{
+          fontWeight:
+            props.view &&
             isMarkActive(props.view?.state, props.schema?.marks.code)
               ? 'bold'
               : undefined,

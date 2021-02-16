@@ -10,6 +10,12 @@ function createInputRules() {
   const em = markInputRule(/(?:\*)([^*]+)(?:\*)$/, schema.marks.em);
   inputRules.push(em);
 
+  const underline = markInputRule(
+    /(?:__)([^_]+)(?:__)$/,
+    schema.marks.underline,
+  );
+  inputRules.push(underline);
+
   // marks
   const code = markInputRule(/(?:^|[^`])(`([^`]+)`)$/, schema.marks.code);
   inputRules.push(code);
