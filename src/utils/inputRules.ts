@@ -16,6 +16,12 @@ function createInputRules() {
   );
   inputRules.push(underline);
 
+  const strikethrough = markInputRule(
+    /(?:~~)([^~]+)(?:~~)$/,
+    schema.marks.strikethrough,
+  );
+  inputRules.push(strikethrough);
+
   // marks
   const code = markInputRule(/(?:^|[^`])(`([^`]+)`)$/, schema.marks.code);
   inputRules.push(code);

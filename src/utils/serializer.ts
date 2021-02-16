@@ -50,6 +50,12 @@ function createSerializer() {
       mixable: true,
       expelEnclosingWhitespace: true,
     },
+    strikethrough: {
+      open: '~~',
+      close: '~~',
+      mixable: true,
+      expelEnclosingWhitespace: true,
+    },
     code: {
       open(_state: any, _mark: any, parent: any, index: any) {
         return backticksFor(parent.child(index), -1);

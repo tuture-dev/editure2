@@ -13,6 +13,7 @@ function createKeymaps() {
   bind('Mod-z', undo);
   bind('Shift-Mod-z', redo);
 
+  // 下面的快捷键都有待近一步优化，目前先参考 outline 的实现
   if ((type = schema.marks.strong)) {
     bind('Mod-b', toggleMark(type));
     bind('Mod-B', toggleMark(type));
@@ -25,6 +26,10 @@ function createKeymaps() {
 
   if ((type = schema.marks.underline)) {
     bind('Mod-u', toggleMark(type));
+  }
+
+  if ((type = schema.marks.strikethrough)) {
+    bind('Mod-d', toggleMark(type));
   }
 
   // code keymaps

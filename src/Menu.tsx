@@ -89,6 +89,23 @@ function Menu(props: Props) {
         style={{
           fontWeight:
             props.view &&
+            isMarkActive(props.view?.state, props.schema?.marks.strikethrough)
+              ? 'bold'
+              : undefined,
+        }}
+        onClick={() =>
+          toggleMark(props.schema.marks.strikethrough)(
+            props.view?.state,
+            props.view?.dispatch,
+          )
+        }>
+        S̶
+      </button>
+      <button
+        type="button"
+        style={{
+          fontWeight:
+            props.view &&
             isMarkActive(props.view?.state, props.schema?.marks.code)
               ? 'bold'
               : undefined,

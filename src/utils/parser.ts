@@ -13,6 +13,9 @@ function createParser() {
     underline: {
       mark: 'u',
     },
+    strikethrough: {
+      mark: 'strikethrough',
+    },
     code_inline: {
       mark: 'code',
       noCloseToken: true,

@@ -62,6 +62,10 @@ const marks: { [name: string]: MarkSpec } = {
     ],
     toDOM: () => ['u', 0],
   },
+  strikethrough: {
+    parseDOM: [{ tag: 's' }, { tag: 'del' }, { tag: 'strike' }],
+    toDOM: () => ['del', 0],
+  },
   code: {
     parseDOM: [{ tag: 'code' }],
     // @ts-ignore
