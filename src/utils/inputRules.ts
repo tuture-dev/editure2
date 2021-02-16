@@ -1,6 +1,7 @@
-import { InputRule } from 'prosemirror-inputrules';
+import { InputRule, textblockTypeInputRule } from 'prosemirror-inputrules';
 import schema from './schema';
 import markInputRule from './markInputRule';
+import { level } from 'chalk';
 
 function createInputRules() {
   let inputRules = [];
@@ -43,6 +44,17 @@ function createInputRules() {
     return tr;
   });
   inputRules.push(link);
+
+  // Heading
+  for (let level = 1; level <= 6; level++) {
+    const heading = textblockTypeInputRule(
+      new RegExp(`^(#{1,${level}})\\s$`),
+      schema.nodes.heading,
+      { level },
+    );
+
+    inputRules.push(heading);
+  }
 
   return inputRules;
 }

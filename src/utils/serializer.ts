@@ -21,6 +21,11 @@ function createSerializer() {
         state.closeBlock(node);
       }
     },
+    heading: (state, node) => {
+      state.write(state.repeat('#', node.attrs.level) + ' ');
+      state.renderInline(node);
+      state.closeBlock(node);
+    },
     hard_break(state: any, node: any, parent: any, index: any) {
       for (let i = index + 1; i < parent.childCount; i++) {
         if (parent.child(i).type != node.type) {

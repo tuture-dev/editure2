@@ -1,4 +1,4 @@
-import { Keymap, toggleMark } from 'prosemirror-commands';
+import { Keymap, toggleMark, setBlockType } from 'prosemirror-commands';
 import { redo, undo } from 'prosemirror-history';
 import schema from './schema';
 
@@ -51,6 +51,17 @@ function createKeymaps() {
 
       return toggleMark(type, { href: '' })(state, dispatch);
     });
+  }
+
+  // Heading
+  if ((type = schema.nodes.heading)) {
+    for (let i = 1; i <= 6; i++)
+      bind(`Shift-Ctrl-${i}`, setBlockType(type, { level: i }));
+  }
+
+  // Paragraph
+  if ((type = schema.nodes.paragraph)) {
+    bind(`Shift-Ctrl-0`, setBlockType(type));
   }
 
   return keys;

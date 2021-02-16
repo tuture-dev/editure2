@@ -30,7 +30,11 @@ function createParser() {
     paragraph: {
       block: 'paragraph',
     },
-    hark_break: { node: 'hard_break' },
+    heading: {
+      block: 'heading',
+      getAttrs: (token) => ({ level: +token.tag.slice(1) }),
+    },
+    hardbreak: { node: 'hard_break' },
   };
 
   return new MarkdownParser(

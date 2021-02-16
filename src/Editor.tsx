@@ -7,6 +7,7 @@ import { keymap } from 'prosemirror-keymap';
 import { MarkdownParser, MarkdownSerializer } from 'prosemirror-markdown';
 import { inputRules, InputRule } from 'prosemirror-inputrules';
 import { history } from 'prosemirror-history';
+import applyDevTools from 'prosemirror-dev-tools';
 
 import './App.css';
 import StyledEditor from './StyledEditor';
@@ -48,6 +49,8 @@ class Editor extends React.Component<Props> {
     this.parser = createParser();
     this.serializer = createSerializer();
     this.view = this.createView();
+
+    applyDevTools(this.view);
   }
 
   createState(value?: string) {
