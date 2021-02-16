@@ -20,6 +20,13 @@ function createParser() {
       mark: 'code',
       noCloseToken: true,
     },
+    link: {
+      mark: 'link',
+      getAttrs: (tok) => ({
+        href: tok.attrGet('href'),
+        title: tok.attrGet('title') || null,
+      }),
+    },
     paragraph: {
       block: 'paragraph',
     },

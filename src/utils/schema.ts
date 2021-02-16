@@ -71,6 +71,28 @@ const marks: { [name: string]: MarkSpec } = {
     // @ts-ignore
     toDOM: () => ['code'],
   },
+  link: {
+    attrs: {
+      href: {
+        default: '',
+      },
+    },
+    inclusive: false,
+    parseDOM: [
+      {
+        tag: 'a[href]',
+        getAttrs: (dom: HTMLElement) => ({ href: dom.getAttribute('href') }),
+      },
+    ],
+    toDOM: (node) => [
+      'a',
+      {
+        ...node.attrs,
+        rel: 'noopener noreferrer nofollow',
+      },
+      0,
+    ],
+  },
 };
 
 export default new Schema({

@@ -1,5 +1,5 @@
 import { MarkdownSerializer } from 'prosemirror-markdown';
-import { backticksFor } from './marks';
+import { backticksFor, isPlainURL } from './marks';
 
 function createSerializer() {
   const nodes = {
@@ -64,6 +64,19 @@ function createSerializer() {
         return backticksFor(parent.child(index - 1), 1);
       },
       escape: false,
+    },
+    link: {
+      open(_state, mark, parent, index) {
+        return isPlainURL(mark, parent, index, 1) ? '<' : '[';
+      },
+      close(state, mark, parent, index) {
+        return isPlainURL(mark, parent, index, -1)
+          ? '>'
+          : '](' +
+              state.esc(mark.attrs.href) +
+              (mark.attrs.title ? ' ' + state.quote(mark.attrs.title) : '') +
+              ')';
+      },
     },
   };
 

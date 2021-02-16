@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'antd';
 import { EditorView } from 'prosemirror-view';
 import { Schema } from 'prosemirror-model';
 import { toggleMark } from 'prosemirror-commands';
@@ -23,18 +24,21 @@ function Menu(props: Props) {
           margin-right: 10px;
         }
       `}>
-      <button
-        type="button"
-        onClick={() => undo(props.view?.state, props.view?.dispatch)}>
+      <Button
+        onClick={() => {
+          undo(props.view?.state, props.view?.dispatch);
+          props.view.focus();
+        }}>
         Undo
-      </button>
-      <button
-        type="button"
-        onClick={() => redo(props.view?.state, props.view?.dispatch)}>
+      </Button>
+      <Button
+        onClick={() => {
+          redo(props.view?.state, props.view?.dispatch);
+          props.view.focus();
+        }}>
         Redo
-      </button>
-      <button
-        type="button"
+      </Button>
+      <Button
         style={{
           fontWeight:
             props.view &&
@@ -42,16 +46,17 @@ function Menu(props: Props) {
               ? 'bold'
               : undefined,
         }}
-        onClick={() =>
+        onClick={() => {
           toggleMark(props.schema.marks.strong)(
             props.view?.state,
             props.view?.dispatch,
-          )
-        }>
+          );
+
+          props.view.focus();
+        }}>
         B
-      </button>
-      <button
-        type="button"
+      </Button>
+      <Button
         style={{
           fontWeight:
             props.view &&
@@ -59,16 +64,17 @@ function Menu(props: Props) {
               ? 'bold'
               : undefined,
         }}
-        onClick={() =>
+        onClick={() => {
           toggleMark(props.schema.marks.em)(
             props.view?.state,
             props.view?.dispatch,
-          )
-        }>
+          );
+
+          props.view.focus();
+        }}>
         I
-      </button>
-      <button
-        type="button"
+      </Button>
+      <Button
         style={{
           fontWeight:
             props.view &&
@@ -76,16 +82,17 @@ function Menu(props: Props) {
               ? 'bold'
               : undefined,
         }}
-        onClick={() =>
+        onClick={() => {
           toggleMark(props.schema.marks.underline)(
             props.view?.state,
             props.view?.dispatch,
-          )
-        }>
+          );
+
+          props.view.focus();
+        }}>
         U
-      </button>
-      <button
-        type="button"
+      </Button>
+      <Button
         style={{
           fontWeight:
             props.view &&
@@ -93,16 +100,17 @@ function Menu(props: Props) {
               ? 'bold'
               : undefined,
         }}
-        onClick={() =>
+        onClick={() => {
           toggleMark(props.schema.marks.strikethrough)(
             props.view?.state,
             props.view?.dispatch,
-          )
-        }>
+          );
+
+          props.view.focus();
+        }}>
         S̶
-      </button>
-      <button
-        type="button"
+      </Button>
+      <Button
         style={{
           fontWeight:
             props.view &&
@@ -110,14 +118,32 @@ function Menu(props: Props) {
               ? 'bold'
               : undefined,
         }}
-        onClick={() =>
+        onClick={() => {
           toggleMark(props.schema.marks.code)(
+            props.view?.state,
+            props.view?.dispatch,
+          );
+
+          props.view.focus();
+        }}>
+        Code
+      </Button>
+      <Button
+        style={{
+          fontWeight:
+            props.view &&
+            isMarkActive(props.view?.state, props.schema?.marks.link)
+              ? 'bold'
+              : undefined,
+        }}
+        onClick={() =>
+          toggleMark(props.schema.marks.link)(
             props.view?.state,
             props.view?.dispatch,
           )
         }>
-        Code
-      </button>
+        Link
+      </Button>
       <br />
       <br />
     </div>
