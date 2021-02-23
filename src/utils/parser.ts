@@ -37,6 +37,12 @@ function createParser() {
     blockquote: {
       block: 'blockquote',
     },
+    list_item: {
+      block: 'list_item',
+    },
+    bullet_list: {
+      block: 'bullet_list',
+    },
     hardbreak: { node: 'hard_break' },
   };
 

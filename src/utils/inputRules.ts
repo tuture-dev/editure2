@@ -5,7 +5,6 @@ import {
 } from 'prosemirror-inputrules';
 import schema from './schema';
 import markInputRule from './markInputRule';
-import { level } from 'chalk';
 
 function createInputRules() {
   let inputRules = [];
@@ -63,6 +62,13 @@ function createInputRules() {
   // Blockquote
   const blockquote = wrappingInputRule(/^\s*>\s$/, schema.nodes.blockquote);
   inputRules.push(blockquote);
+
+  // BulletList
+  const bullet_list = wrappingInputRule(
+    /^\s*([-+*])\s$/,
+    schema.nodes.bullet_list,
+  );
+  inputRules.push(bullet_list);
 
   return inputRules;
 }

@@ -1,7 +1,12 @@
 import { Keymap, toggleMark, setBlockType } from 'prosemirror-commands';
 import { redo, undo } from 'prosemirror-history';
 import schema from './schema';
-import { toggleWrap } from './nodes';
+import { toggleWrap, toggleList } from './nodes';
+import {
+  liftListItem,
+  sinkListItem,
+  splitListItem,
+} from 'prosemirror-schema-list';
 
 function createKeymaps() {
   let keys: Keymap<any> = {},
@@ -70,6 +75,20 @@ function createKeymaps() {
   if ((type = schema.nodes.blockquote)) {
     bind('Ctrl->', toggleWrap(type));
     bind('Mod-]', toggleWrap(type));
+  }
+
+  // ListItem
+  if ((type = schema.nodes.list_item)) {
+    bind('Enter', splitListItem(type));
+    bind('Tab', sinkListItem(type));
+    bind('Shift-Tab', liftListItem(type));
+    bind('Mod-]', sinkListItem(type));
+    bind('Mod-[', liftListItem(type));
+  }
+
+  // BulletList
+  if ((type = schema.nodes.bullet_list)) {
+    bind('Shift-Ctrl-8', toggleList(type, schema.nodes.list_item));
   }
 
   return keys;

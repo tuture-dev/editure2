@@ -38,6 +38,19 @@ const nodes: { [name: string]: NodeSpec } = {
     ],
     toDOM: (node) => [`h${node.attrs.level}`, 0],
   },
+  list_item: {
+    content: 'paragraph block*',
+    defining: true,
+    draggable: true,
+    parseDOM: [{ tag: 'li' }],
+    toDOM: () => ['li', 0],
+  },
+  bullet_list: {
+    content: 'list_item+',
+    group: 'block',
+    parseDOM: [{ tag: 'ul' }],
+    toDOM: () => ['ul', 0],
+  },
   text: {
     group: 'inline',
   },

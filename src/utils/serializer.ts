@@ -26,6 +26,12 @@ function createSerializer() {
       state.renderInline(node);
       state.closeBlock(node);
     },
+    list_item: (state, node) => {
+      state.renderContent(node);
+    },
+    bullet_list: (state, node) => {
+      state.renderList(node, '  ', () => (node.attrs.bullet || '*') + ' ');
+    },
     hard_break(state: any, node: any, parent: any, index: any) {
       for (let i = index + 1; i < parent.childCount; i++) {
         if (parent.child(i).type != node.type) {

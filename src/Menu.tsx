@@ -10,7 +10,12 @@ import { jsx, css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { isMarkActive } from './utils/marks';
-import { isNodeActive, toggleBlockType, toggleWrap } from './utils/nodes';
+import {
+  isNodeActive,
+  toggleBlockType,
+  toggleWrap,
+  toggleList,
+} from './utils/nodes';
 
 const { Option } = Select;
 
@@ -193,6 +198,24 @@ function Menu(props: Props) {
           props.view.focus();
         }}>
         引用
+      </Button>
+      <Button
+        style={{
+          fontWeight:
+            props.view &&
+            isNodeActive(props.schema?.nodes.bullet_list)(props.view?.state)
+              ? 'bold'
+              : undefined,
+        }}
+        onClick={() => {
+          toggleList(
+            props.schema.nodes.bullet_list,
+            props.schema.nodes.list_item,
+          )(props.view?.state, props.view?.dispatch);
+
+          props.view.focus();
+        }}>
+        无序列表
       </Button>
       <br />
       <br />
