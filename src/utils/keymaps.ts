@@ -91,6 +91,11 @@ function createKeymaps() {
     bind('Shift-Ctrl-8', toggleList(type, schema.nodes.list_item));
   }
 
+  // OrderedList
+  if ((type = schema.nodes.ordered_list)) {
+    bind('Shift-Ctrl-9', toggleList(type, schema.nodes.list_item));
+  }
+
   return keys;
 }
 

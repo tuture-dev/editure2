@@ -70,6 +70,15 @@ function createInputRules() {
   );
   inputRules.push(bullet_list);
 
+  // BulletList
+  const ordered_list = wrappingInputRule(
+    /^(\d+)\.\s$/,
+    schema.nodes.ordered_list,
+    (match) => ({ order: +match[1] }),
+    (match, node) => node.childCount + node.attrs.order == +match[1],
+  );
+  inputRules.push(ordered_list);
+
   return inputRules;
 }
 

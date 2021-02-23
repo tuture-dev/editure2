@@ -32,6 +32,16 @@ function createSerializer() {
     bullet_list: (state, node) => {
       state.renderList(node, '  ', () => (node.attrs.bullet || '*') + ' ');
     },
+    ordered_list: (state, node) => {
+      const start = node.attrs.order || 1;
+      const maxW = `${start + node.childCount - 1}`.length;
+      const space = state.repeat(' ', maxW + 2);
+
+      state.renderList(node, space, (i) => {
+        const nStr = `${start + i}`;
+        return state.repeat(' ', maxW - nStr.length) + nStr + '. ';
+      });
+    },
     hard_break(state: any, node: any, parent: any, index: any) {
       for (let i = index + 1; i < parent.childCount; i++) {
         if (parent.child(i).type != node.type) {

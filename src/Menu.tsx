@@ -217,6 +217,24 @@ function Menu(props: Props) {
         }}>
         无序列表
       </Button>
+      <Button
+        style={{
+          fontWeight:
+            props.view &&
+            isNodeActive(props.schema?.nodes.ordered_list)(props.view?.state)
+              ? 'bold'
+              : undefined,
+        }}
+        onClick={() => {
+          toggleList(
+            props.schema.nodes.ordered_list,
+            props.schema.nodes.list_item,
+          )(props.view?.state, props.view?.dispatch);
+
+          props.view.focus();
+        }}>
+        有序列表
+      </Button>
       <br />
       <br />
     </div>

@@ -51,6 +51,29 @@ const nodes: { [name: string]: NodeSpec } = {
     parseDOM: [{ tag: 'ul' }],
     toDOM: () => ['ul', 0],
   },
+  ordered_list: {
+    attrs: {
+      order: {
+        default: 1,
+      },
+    },
+    content: 'list_item+',
+    group: 'block',
+    parseDOM: [
+      {
+        tag: 'ol',
+        getAttrs: (dom: HTMLOListElement) => ({
+          order: dom.hasAttribute('start')
+            ? parseInt(dom.getAttribute('start') || '1', 10)
+            : 1,
+        }),
+      },
+    ],
+    toDOM: (node) =>
+      node.attrs.order === 1
+        ? ['ol', 0]
+        : ['ol', { start: node.attrs.order }, 0],
+  },
   text: {
     group: 'inline',
   },

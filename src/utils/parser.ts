@@ -43,6 +43,9 @@ function createParser() {
     bullet_list: {
       block: 'bullet_list',
     },
+    ordered_list: {
+      block: 'ordered_list',
+    },
     hardbreak: { node: 'hard_break' },
   };
 
