@@ -3,11 +3,11 @@ import { backticksFor, isPlainURL } from './marks';
 
 function createSerializer() {
   const nodes = {
-    blockquote: (state: any, node: any) => {
-      state.wrapBlock('> ', null, node, () => state.renderContent(node));
-    },
     text: (state: any, node: any) => {
       state.text(node.text);
+    },
+    blockquote: (state: any, node: any) => {
+      state.wrapBlock('> ', null, node, () => state.renderContent(node));
     },
     paragraph: (state: any, node: any) => {
       if (
@@ -20,6 +20,27 @@ function createSerializer() {
         state.renderInline(node);
         state.closeBlock(node);
       }
+    },
+    heading: (state, node) => {
+      state.write(state.repeat('#', node.attrs.level) + ' ');
+      state.renderInline(node);
+      state.closeBlock(node);
+    },
+    list_item: (state, node) => {
+      state.renderContent(node);
+    },
+    bullet_list: (state, node) => {
+      state.renderList(node, '  ', () => (node.attrs.bullet || '*') + ' ');
+    },
+    ordered_list: (state, node) => {
+      const start = node.attrs.order || 1;
+      const maxW = `${start + node.childCount - 1}`.length;
+      const space = state.repeat(' ', maxW + 2);
+
+      state.renderList(node, space, (i) => {
+        const nStr = `${start + i}`;
+        return state.repeat(' ', maxW - nStr.length) + nStr + '. ';
+      });
     },
     hard_break(state: any, node: any, parent: any, index: any) {
       for (let i = index + 1; i < parent.childCount; i++) {

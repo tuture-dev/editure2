@@ -6918,6 +6918,11 @@ prosemirror-transform@^1.0.0, prosemirror-transform@^1.1.0, prosemirror-transfor
   dependencies:
     prosemirror-model "^1.0.0"
 
+prosemirror-utils@^0.9.6:
+  version "0.9.6"
+  resolved "https://registry.npm.taobao.org/prosemirror-utils/download/prosemirror-utils-0.9.6.tgz#3d97bd85897e3b535555867dc95a51399116a973"
+  integrity sha1-PZe9hYl+O1NVVYZ9yVpROZEWqXM=
+
 prosemirror-view@^1.0.0, prosemirror-view@^1.1.0, prosemirror-view@^1.13.3, prosemirror-view@^1.16.0:
   version "1.17.3"
   resolved "https://registry.npm.taobao.org/prosemirror-view/download/prosemirror-view-1.17.3.tgz#66a51da731e840a83ddcc9531f2e5f2b519ce5ff"

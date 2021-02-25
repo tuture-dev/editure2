@@ -18,6 +18,62 @@ const nodes: { [name: string]: NodeSpec } = {
     parseDOM: [{ tag: 'blockquote' }],
     toDOM: () => ['blockquote', 0],
   },
+  heading: {
+    attrs: {
+      level: {
+        default: 1,
+      },
+    },
+    content: 'inline*',
+    group: 'block',
+    defining: true,
+    draggable: false,
+    parseDOM: [
+      { tag: 'h1', attrs: { level: 1 } },
+      { tag: 'h2', attrs: { level: 2 } },
+      { tag: 'h3', attrs: { level: 3 } },
+      { tag: 'h4', attrs: { level: 4 } },
+      { tag: 'h5', attrs: { level: 5 } },
+      { tag: 'h6', attrs: { level: 6 } },
+    ],
+    toDOM: (node) => [`h${node.attrs.level}`, 0],
+  },
+  list_item: {
+    content: 'paragraph block*',
+    defining: true,
+    draggable: true,
+    parseDOM: [{ tag: 'li' }],
+    toDOM: () => ['li', 0],
+  },
+  bullet_list: {
+    content: 'list_item+',
+    group: 'block',
+    parseDOM: [{ tag: 'ul' }],
+    toDOM: () => ['ul', 0],
+  },
+  ordered_list: {
+    attrs: {
+      order: {
+        default: 1,
+      },
+    },
+    content: 'list_item+',
+    group: 'block',
+    parseDOM: [
+      {
+        tag: 'ol',
+        getAttrs: (dom: HTMLOListElement) => ({
+          order: dom.hasAttribute('start')
+            ? parseInt(dom.getAttribute('start') || '1', 10)
+            : 1,
+        }),
+      },
+    ],
+    toDOM: (node) =>
+      node.attrs.order === 1
+        ? ['ol', 0]
+        : ['ol', { start: node.attrs.order }, 0],
+  },
   text: {
     group: 'inline',
   },
